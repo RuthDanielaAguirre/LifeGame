@@ -1,0 +1,74 @@
+{
+  "personajes": [
+    {
+      "nombre": "Estudiante de Programación",
+      "vida": 100,
+      "energia": 90,
+      "habilidad": {
+        "nombre": "Resolución de bugs",
+        "efecto": "Recupera 20 de energía"
+      },
+      "debilidad": {
+        "nombre": "Fatiga mental",
+        "efecto": "Pierde 15 de energía por turno"
+      },
+      "meta": "Desarrollar su primera aplicación funcional y lanzarla al público"
+    },
+    {
+      "nombre": "Mamá de un Bebé",
+      "vida": 120,
+      "energia": 60,
+      "habilidad": {
+        "nombre": "Multitarea extrema",
+        "efecto": "Puede hacer dos acciones en un turno"
+      },
+      "debilidad": {
+        "nombre": "Privación de sueño",
+        "efecto": "Pierde 10 de vida y 20 de energía por turno"
+      },
+      "meta": "Lograr un balance entre el cuidado de su bebé y su vida profesional"
+    },
+    {
+      "nombre": "Coreógrafa de Video-Danza",
+      "vida": 110,
+      "energia": 100,
+      "habilidad": {
+        "nombre": "Expresión corporal",
+        "efecto": "Confunde a un enemigo por 2 turnos"
+      },
+      "debilidad": {
+        "nombre": "Lesiones musculares",
+        "efecto": "Pierde 30 de vida"
+      },
+      "meta": "Conseguir financiamiento para producir su propia obra de video-danza"
+    },
+    {
+      "nombre": "Trabajadora de Informática",
+      "vida": 100,
+      "energia": 85,
+      "habilidad": {
+        "nombre": "Ciberseguridad",
+        "efecto": "Anula un ataque enemigo"
+      },
+      "debilidad": {
+        "nombre": "Horas extra inesperadas",
+        "efecto": "Pierde 10 de vida por turno"
+      },
+      "meta": "Obtener una certificación en ciberseguridad y conseguir un ascenso"
+    },
+    {
+      "nombre": "Hippie Viajera",
+      "vida": 90,
+      "energia": 120,
+      "habilidad": {
+        "nombre": "Conexión con la naturaleza",
+        "efecto": "Regenera 15 de vida por turno"
+      },
+      "debilidad": {
+        "nombre": "Falta de dinero",
+        "efecto": "No puede usar habilidades especiales por 2 turnos"
+      },
+      "meta": "Visitar 10 países y aprender nuevas filosofías de vida"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "enemigos": [
+    {
+      "nombre": "Misoginia",
+      "tipo": "Sistema de opresión",
+      "vida": 200,
+      "energia": 100,
+      "habilidad": {
+        "nombre": "Menospreciar logros",
+        "efecto": "Reduce el ataque de todas las jugadoras en 20"
+      },
+      "debilidad": {
+        "nombre": "Educación",
+        "efecto": "Quita 50 de vida"
+      }
+    },
+    {
+      "nombre": "Ansiedad",
+      "tipo": "Estado mental",
+      "vida": 140,
+      "energia": 90,
+      "habilidad": {
+        "nombre": "Pensamientos catastróficos",
+        "efecto": "El personaje afectado no puede atacar por 2 turnos"
+      },
+      "debilidad": {
+        "nombre": "Terapia",
+        "efecto": "El enemigo no puede atacar por 3 turnos"
+      }
+    },
+    {
+      "nombre": "Trabajo Estresante",
+      "tipo": "Condición laboral",
+      "vida": 160,
+      "energia": 100,
+      "habilidad": {
+        "nombre": "Burnout",
+        "efecto": "Reduce la energía máxima de un personaje en 20"
+      },
+      "debilidad": {
+        "nombre": "Límites saludables",
+        "efecto": "Anula su habilidad por 2 turnos"
+      }
+    },
+    {
+      "nombre": "Exámenes Escritos a Mano",
+      "tipo": "Sistema académico",
+      "vida": 120,
+      "energia": 80,
+      "habilidad": {
+        "nombre": "Tiempo limitado",
+        "efecto": "Reduce la precisión de un personaje en un 25%"
+      },
+      "debilidad": {
+        "nombre": "Métodos de evaluación prácticos",
+        "efecto": "El enemigo pierde la mitad de su vida"
+      }
+    },
+    {
+      "nombre": "Lloros de Bebé",
+      "tipo": "Desafío maternal",
+      "vida": 80,
+      "energia": 120,
+      "habilidad": {
+        "nombre": "Interrupciones constantes",
+        "efecto": "El personaje afectado no puede usar habilidades por 1 turno"
+      },
+      "debilidad": {
+        "nombre": "Paciencia",
+        "efecto": "El enemigo pierde 50 de vida y 50 de energía"
+      }
+    }
+  ]
+}

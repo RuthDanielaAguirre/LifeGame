@@ -1,0 +1,46 @@
+{
+  "horoscopo": {
+    "positivas": [
+      {
+        "mensaje": "Los astros están alineados para ti. Hoy todo fluirá con facilidad.",
+        "efecto": "Ganas 10 de energía"
+      },
+      {
+        "mensaje": "Tu creatividad estará en su punto más alto. Aprovecha para expresarte.",
+        "efecto": "Tus habilidades son un 20% más efectivas hoy"
+      },
+      {
+        "mensaje": "Sientes una fuerza interior renovada. Nada puede detenerte.",
+        "efecto": "Ganas 10 de vida"
+      }
+    ],
+    "negativas": [
+      {
+        "mensaje": "Un eclipse emocional nubla tu día. Mantén la calma.",
+        "efecto": "Pierdes 10 de energía"
+      },
+      {
+        "mensaje": "Un obstáculo inesperado aparece en tu camino. No te desesperes.",
+        "efecto": "Pierdes 10 de vida"
+      },
+      {
+        "mensaje": "La incertidumbre reina hoy. Puede que dudes más de lo habitual.",
+        "efecto": "Tus habilidades tardan un turno más en activarse"
+      }
+    ],
+    "neutras": [
+      {
+        "mensaje": "Hoy será un día normal, sin grandes cambios.",
+        "efecto": "Nada cambia, sigue adelante"
+      },
+      {
+        "mensaje": "El universo está en equilibrio. No hay eventos inesperados.",
+        "efecto": "Tu energía y vida se mantienen iguales"
+      },
+      {
+        "mensaje": "Un pequeño misterio te rodea. Quizás encuentres respuestas pronto.",
+        "efecto": "Nada ocurre por ahora, pero presta atención a las señales"
+      }
+    ]
+  }
+}

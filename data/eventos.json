@@ -1,0 +1,50 @@
+[
+  {
+    "tipo": "positivo",
+    "descripcion": "Encuentras una poción de energía y recuperas 20 puntos.",
+    "efecto": {"energia": 20},
+    "rol": "todos"
+  },
+  {
+    "tipo": "negativo",
+    "descripcion": "Pasaste toda la noche estudiando y ahora estás agotada.",
+    "efecto": {"energia": -15},
+    "rol": "Estudiante de Programación"
+  },
+  {
+    "tipo": "positivo",
+    "descripcion": "Tu bebé finalmente durmió toda la noche. Te sientes renovada.",
+    "efecto": {"energia": 30},
+    "rol": "Mamá de un Bebé"
+  },
+  {
+    "tipo": "negativo",
+    "descripcion": "Te lesionaste practicando una nueva coreografía.",
+    "efecto": {"vida": -20},
+    "rol": "Coreógrafa de Video-Danza"
+  },
+  {
+    "tipo": "positivo",
+    "descripcion": "Recibes reconocimiento en tu trabajo, te sientes motivada.",
+    "efecto": {"energia": 10},
+    "rol": "Trabajadora de Informática"
+  },
+  {
+    "tipo": "negativo",
+    "descripcion": "Un cliente difícil te hizo perder toda la paciencia.",
+    "efecto": {"energia": -10},
+    "rol": "Trabajadora de Informática"
+  },
+  {
+    "tipo": "positivo",
+    "descripcion": "Conoces a una persona increíble en tu viaje.",
+    "efecto": {"vida": 10, "energia": 10},
+    "rol": "Hippie Viajera"
+  },
+  {
+    "tipo": "neutro",
+    "descripcion": "Un día común, sin grandes eventos.",
+    "efecto": {},
+    "rol": "todos"
+  }
+]
