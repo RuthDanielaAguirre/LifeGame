@@ -1,3 +1,12 @@
+#import sys
+#import os
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'database')))
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  # Agrega la carpeta raíz
+
+
 from database.db_config import conectar_bd
 
 def registrar_usuario(username, email, password_hash):

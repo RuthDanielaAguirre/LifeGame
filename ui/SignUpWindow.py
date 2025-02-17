@@ -1,5 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  # Agrega la carpeta raíz
+
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 from controllers.auth_controller import registrar_usuario
 from ui.login_window import LoginWindow
 
@@ -7,6 +12,11 @@ class SignUpWindow:
     def __init__(self, root):
         self.root = root
         self.root.title("LifeGame - Registro")
+        self.root.geometry("700x500")
+
+        self.background_image = Image.open("assets/login1.png")  # Cambia la imagen si es necesario
+        self.background_image = self.background_image.resize((700, 500))  # Ajusta al tamaño de la ventana
+        self.background_photo = ImageTk.PhotoImage(self.background_image)
 
         tk.Label(root, text="Usuario:").pack()
         self.entry_usuario = tk.Entry(root)

@@ -1,24 +1,49 @@
+#import sys
+#import os
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'controllers')))
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  # Agrega la carpeta raíz
+
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 from controllers.auth_controller import iniciar_sesion
 from ui.game_window import GameWindow
-from ui.signup_window import SignUpWindow
+#from ui.SignUpWindow import SignUpWindow
 
 class LoginWindow:
     def __init__(self, root):
         self.root = root
         self.root.title("LifeGame - Login")
+        self.root.geometry("700x500")
 
-        tk.Label(root, text="Usuario:").pack()
-        self.entry_usuario = tk.Entry(root)
+        self.background_image = Image.open("assets/login1.png")
+        self.background_image = self.background_image.resize((700, 500))  # Redimensionamos la imagen al tamaño de la ventana
+        self.background_photo = ImageTk.PhotoImage(self.background_image)
+
+        self.background_label = tk.Label(self.root, image=self.background_photo)
+        self.background_label.place(relwidth=1, relheight=1)
+
+        framet = tk.Frame(self.root, bg="black", bd=4)
+        framet.pack(side="top", fill="x")
+
+        labelt = tk.Label(framet, text="Bienvenido a LifeGame", font=("Helvetica", 16), fg="white", bg="black")
+        labelt.pack(side="top", anchor="w",  pady = 5)
+
+        frameLog = tk.Frame(self.root, bg="black")
+        frameLog.pack(side="left")
+
+        tk.Label(frameLog, text="Usuario:",font=("Helvetica", 12), fg="white", bg="black").pack()
+        self.entry_usuario = tk.Entry(frameLog)
         self.entry_usuario.pack()
 
-        tk.Label(root, text="Contraseña:").pack()
-        self.entry_contraseña = tk.Entry(root, show="*")
+        tk.Label(frameLog, text="Contraseña:",font=("Helvetica", 12), fg="white", bg="black").pack()
+        self.entry_contraseña = tk.Entry(frameLog, show="*")
         self.entry_contraseña.pack()
 
-        tk.Button(root, text="Iniciar sesión", command=self.login).pack()
-        tk.Button(root, text="Registrarse", command=self.abrir_registro).pack()
+        tk.Button(frameLog, text="Iniciar sesión", command=self.login).pack()
+        tk.Button(frameLog, text="Registrarse", command=self.abrir_registro).pack()
 
     def login(self):
         username = self.entry_usuario.get()
