@@ -1,16 +1,19 @@
-#import sys
-#import os
-#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'controllers')))
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  # Agrega la carpeta raíz
-
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
-from controllers.auth_controller import iniciar_sesion
-from ui.game_window import GameWindow
-#from ui.SignUpWindow import SignUpWindow
+from database.db_queries import guardar_progreso, obtener_personaje_usuario, obtener_personajes_disponibles
+
+try:
+    from ui.game_window import GameWindow
+except ModuleNotFoundError as e:
+    print(f"⚠️ Error al importar GameWindow: {e}")
+
+# autenticación
+try:
+    from controllers.auth_controller import iniciar_sesion
+except ModuleNotFoundError as e:
+    print(f"⚠️ Error al importar iniciar_sesion: {e}")
+
 
 class LoginWindow:
     def __init__(self, root):
@@ -18,27 +21,23 @@ class LoginWindow:
         self.root.title("LifeGame - Login")
         self.root.geometry("700x500")
 
+        # Fondo con imagen
         self.background_image = Image.open("assets/login1.png")
-        self.background_image = self.background_image.resize((700, 500))  # Redimensionamos la imagen al tamaño de la ventana
+        self.background_image = self.background_image.resize((700, 500))
         self.background_photo = ImageTk.PhotoImage(self.background_image)
 
         self.background_label = tk.Label(self.root, image=self.background_photo)
         self.background_label.place(relwidth=1, relheight=1)
 
-        framet = tk.Frame(self.root, bg="black", bd=4)
-        framet.pack(side="top", fill="x")
-
-        labelt = tk.Label(framet, text="Bienvenido a LifeGame", font=("Helvetica", 16), fg="white", bg="black")
-        labelt.pack(side="top", anchor="w",  pady = 5)
-
+        # Área de login
         frameLog = tk.Frame(self.root, bg="black")
-        frameLog.pack(side="left")
+        frameLog.pack(side="left", padx=20, pady=20)
 
-        tk.Label(frameLog, text="Usuario:",font=("Helvetica", 12), fg="white", bg="black").pack()
+        tk.Label(frameLog, text="Usuario:", font=("Helvetica", 12), fg="white", bg="black").pack()
         self.entry_usuario = tk.Entry(frameLog)
         self.entry_usuario.pack()
 
-        tk.Label(frameLog, text="Contraseña:",font=("Helvetica", 12), fg="white", bg="black").pack()
+        tk.Label(frameLog, text="Contraseña:", font=("Helvetica", 12), fg="white", bg="black").pack()
         self.entry_contraseña = tk.Entry(frameLog, show="*")
         self.entry_contraseña.pack()
 
@@ -46,6 +45,7 @@ class LoginWindow:
         tk.Button(frameLog, text="Registrarse", command=self.abrir_registro).pack()
 
     def login(self):
+        """Verifica el usuario y carga su progreso o lo envía a la selección de personaje."""
         username = self.entry_usuario.get()
         password = self.entry_contraseña.get()
 
@@ -53,17 +53,69 @@ class LoginWindow:
         if user:
             messagebox.showinfo("Bienvenida", f"¡Bienvenida {user['username']}!")
             self.root.destroy()  # Cierra la ventana de login
-            root_juego = tk.Tk()
-            GameWindow(root_juego, user['id'])  # Abre la ventana del juego
-            root_juego.mainloop()
+
+            # obtener el personaje del usuario
+            personaje = obtener_personaje_usuario(user["id"])
+
+            if personaje:
+                root_juego = tk.Tk()
+                GameWindow(root_juego, user["id"])
+                root_juego.mainloop()
+            else:
+                root_seleccion = tk.Tk()
+                SeleccionPersonajeWindow(root_seleccion, user["id"])
+                root_seleccion.mainloop()
         else:
             messagebox.showerror("Error", "Usuario o contraseña incorrectos.")
 
     def abrir_registro(self):
+        messagebox.showinfo("Registro", "Aquí iría la ventana de registro.")
+
+
+class SeleccionPersonajeWindow:
+    def __init__(self, root, user_id):
+        self.root = root
+        self.user_id = user_id
+        self.root.title("Selecciona tu Personaje")
+        self.root.geometry("800x600")
+
+        self.personajes = obtener_personajes_disponibles()
+
+        if not self.personajes:
+            messagebox.showerror("Error", "No hay personajes disponibles.")
+            self.root.destroy()
+            return
+
+        tk.Label(root, text="Elige tu personaje:", font=("Helvetica", 14)).pack()
+
+        self.frame_personajes = tk.Frame(root)
+        self.frame_personajes.pack()
+
+        self.imagenes = []  # Almacena imágenes para evitar garbage collection
+
+        for personaje in self.personajes:
+            img = Image.open(personaje["image_path"])
+            img = img.resize((150, 150))
+            img = ImageTk.PhotoImage(img)
+
+            self.imagenes.append(img)
+
+            btn = tk.Button(self.frame_personajes, image=img, command=lambda p=personaje: self.seleccionar_personaje(p))
+            btn.pack(side=tk.LEFT, padx=10, pady=10)
+
+    def seleccionar_personaje(self, personaje):
+        """Permite seleccionar un personaje y guarda el progreso del usuario."""
+        guardar_progreso(self.user_id, personaje["id"], 100, 100, None, None)
+
+        messagebox.showinfo("Seleccionado", f"Has elegido a {personaje['name']}.")
         self.root.destroy()
-        root_signup = tk.Tk()
-        SignUpWindow(root_signup)
-        root_signup.mainloop()
+
+        # ersonaje elegido
+        root_juego = tk.Tk()
+        GameWindow(root_juego, self.user_id)
+        root_juego.mainloop()
+
+
 
 if __name__ == "__main__":
     root = tk.Tk()

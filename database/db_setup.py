@@ -6,17 +6,17 @@ def ejecutar_script_sql():
     conn = None
     cursor = None
     try:
-        # Paso 1: Conectar sin especificar la base de datos, para poder crearla
+        # onectar sin especificar la base de datos, para poder crearla
         temp_config = conectar_bd().copy()
         temp_config.pop("database", None)  # Quitar 'database' para conectarnos solo al servidor
         conn = mysql.connector.connect(**temp_config)
         cursor = conn.cursor()
 
-        # Paso 2: Crear la base de datos si no existe, y usarla
+        # Crear la base de datos si no existe, y usarla
         cursor.execute("CREATE DATABASE IF NOT EXISTS game;")
         cursor.execute("USE game;")
 
-        # Paso 3: Crear tablas principales
+        # Crear tablas principales
 
         # Tabla users
         cursor.execute("""
