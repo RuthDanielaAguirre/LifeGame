@@ -8,11 +8,11 @@ Bienvenido a LifeGame, un juego de rol que relata las aventuras de personajes in
 
 📌 Características Principales
 
-✅ Personajes con Personalidad - Elige tu avatar con su propio trasfondo e historia.
-✅ Horóscopos Dinámicos - Tu signo zodiacal no es solo decorativo, influye en tu juego.
-✅ Enemigos Aleatorios - Cada batalla es diferente, con enemigos generados aleatoriamente.
-✅ Eventos Narrativos - Toma decisiones que afectarán el desarrollo de la historia.
-✅ Interfaz con Tkinter - Disfruta de una experiencia visual simple pero inmersiva.
+✅ Personajes con Personalidad - Elige tu avatar con su propio trasfondo e historia."\n"
+✅ Horóscopos Dinámicos - Tu signo zodiacal no es solo decorativo, influye en tu juego."\n"
+✅ Enemigos Aleatorios - Cada batalla es diferente, con enemigos generados aleatoriamente."\n"
+✅ Eventos Narrativos - Toma decisiones que afectarán el desarrollo de la historia."\n"
+✅ Interfaz con Tkinter - Disfruta de una experiencia visual simple pero inmersiva."\n"
 
 🛠 Instalación y Configuración
 
@@ -43,11 +43,11 @@ python -m ui.login_window
 
 📖 Cómo Jugar
 
-1️⃣ Regístrate e inicia sesión.
-2️⃣ Selecciona un personaje.
-3️⃣ Consulta tu horóscopo para ver tus ventajas o desventajas.
-4️⃣ Explora, lucha y toma decisiones clave.
-5️⃣ Sobrevive y evoluciona según tus elecciones.
+1️⃣ Regístrate e inicia sesión."\n"
+2️⃣ Selecciona un personaje."\n"
+3️⃣ Consulta tu horóscopo para ver tus ventajas o desventajas."\n"
+4️⃣ Explora, lucha y toma decisiones clave."\n"
+5️⃣ Sobrevive y evoluciona según tus elecciones."\n"
 
 📌 Tecnologías Utilizadas
 
@@ -68,9 +68,9 @@ MySQL Connector 🔌 (Conexión con la base de datos)
 🤝 Contribuir al Proyecto
 
 ¡Las ideas frescas siempre son bienvenidas! 🌱 Si quieres contribuir, sigue estos pasos:
-1️⃣ Haz un fork del repo.
-2️⃣ Crea una nueva rama: git checkout -b mi-mejora.
-3️⃣ Sube tus cambios: git commit -m "Mejora en el sistema de enemigos".
+1️⃣ Haz un fork del repo."\n"
+2️⃣ Crea una nueva rama: git checkout -b mi-mejora."\n"
+3️⃣ Sube tus cambios: git commit -m "Mejora en el sistema de enemigos"."\n"
 4️⃣ Abre un pull request.
 
 📞 Contacto
