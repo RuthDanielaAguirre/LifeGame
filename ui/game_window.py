@@ -8,6 +8,7 @@ from game_logic.horoscope import aplicar_efecto_horoscopo
 from database.db_queries import obtener_enemigos, obtener_horoscopo, obtener_personaje_usuario, ejecutar_query
 from game_logic.skills import aplicar_habilidad
 from database.db_queries import resetear_vida_enemigos
+from database.db_queries import obtener_personaje_por_id
 
 
 class GameWindow:
@@ -37,15 +38,24 @@ class GameWindow:
         self.enemigos = obtener_enemigos()
         self.enemigo = random.choice(self.enemigos)
         self.progreso = cargar_progreso(self.user_id)
-        self.horoscopo = aplicar_efecto_horoscopo(self.jugador, None)
 
-        self.horoscopo = {
-            "message": self.progreso.get("last_horoscope", "No hay horóscopo disponible."),
-            "effect": self.parsear_efecto(self.progreso.get("horoscope_effect", "")),
-            "image_path": self.progreso.get("horoscope_image", "assets/horoscope/neutro1.png")
-        }
+        if self.progreso.get("last_horoscope"):
+            self.horoscopo = {
+                "id": self.progreso.get("last_horoscope_id"),
+                "message": self.progreso.get("last_horoscope") or "🌙 Horóscopo no disponible.",
+                "effect": self.parsear_efecto(self.progreso.get("horoscope_effect") or "")
+            }
+        else:
+            nuevo_horoscopo = aplicar_efecto_horoscopo(self.jugador, None) or {}
+            self.horoscopo = {
+                "id": nuevo_horoscopo.get("id", None),
+                "message": nuevo_horoscopo.get("message", "🌙 Que el viento guie tu destino."),
+                "effect": nuevo_horoscopo.get("effect", {}),
+                "image_path": nuevo_horoscopo.get("image_path", "assets/horoscope/neutro1.png")
+            }
 
-        self.label_horoscopo = tk.Label(root, text=self.horoscopo["message"], font=("Helvetica", 16), bg="black", fg="yellow")
+        mensaje = self.horoscopo.get("message", "🌌 Horóscopo desconocido")
+        self.label_horoscopo = tk.Label(root, text=mensaje, font=("Helvetica", 16), bg="black", fg="yellow")
         self.label_horoscopo.pack(pady=5)
 
         # información del jugador
@@ -94,7 +104,8 @@ class GameWindow:
             text=f"{self.enemigo['name']} - Vida: {self.enemigo['life']}, Energía: {self.enemigo['energy']}")
 
         # Actualizar mensaje del horóscopo
-        self.label_horoscopo.config(text=self.horoscopo["message"])
+        mensaje_horoscopo = self.horoscopo.get("message", "🌠 Tu destino es un misterio...")
+        self.label_horoscopo.config(text=mensaje_horoscopo)
 
         # Refrescar la UI
         self.root.update()
@@ -118,6 +129,12 @@ class GameWindow:
                 enemigos_disponibles = obtener_enemigos()
 
             self.enemigo = random.choice(enemigos_disponibles)
+
+            # Actualizar imagen y texto del enemigo
+            nueva_imagen = ImageTk.PhotoImage(Image.open(self.enemigo["image_path"]))
+            self.label_img_enemigo.config(image=nueva_imagen)
+            self.label_img_enemigo.image = nueva_imagen  # <- evitar que se pierda la imagen
+            self.label_enemigo.config(text=f"{self.enemigo['name']} - Vida: {self.enemigo['life']}")
 
             # Verificar si el horóscopo tiene un ID antes de guardarlo
             horoscopo_id = self.horoscopo.get("id", None)
@@ -150,7 +167,7 @@ class GameWindow:
 
             if nuevo_personaje:
                 # Asignar nuevo personaje al jugador
-                self.jugador = obtener_personaje_usuario(nuevo_personaje["id"])
+                self.jugador = obtener_personaje_por_id(nuevo_personaje["id"])
                 self.jugador["life"] = 100  # Reiniciar vida
                 self.jugador["energy"] = 100  # Reiniciar energía
 
@@ -199,7 +216,17 @@ class GameWindow:
         self.manejar_turno()
 
     def guardar_y_salir(self):
-        guardar_progreso(self.user_id, self.jugador["character_id"], self.jugador["life"], self.jugador["energy"], self.enemigo["id"], self.horoscopo["id", None])
+        horoscopo_id = self.horoscopo.get("id", None)
+
+        guardar_progreso(
+            self.user_id,
+            self.jugador["character_id"],
+            self.jugador["life"],
+            self.jugador["energy"],
+            self.enemigo["id"],
+            horoscopo_id
+        )
+
         messagebox.showinfo("Progreso Guardado", "Tu progreso ha sido guardado. Cerrando el juego...")
         self.root.destroy()
 

@@ -42,18 +42,21 @@ def actualizar_estado_enemigo(enemigo):
         UPDATE enemies SET life = %s WHERE id = %s
     """
     ejecutar_query(query, (enemigo["life"], enemigo["id"]), commit=True)
-    print(f"✅ Estado del enemigo actualizado en la base de datos: {enemigo['name']} (Vida {enemigo['life']})")
-
+    # Mostrar nombre solo si está disponible
+    if "name" in enemigo:
+        print(f"✅ Estado del enemigo actualizado en la base de datos: {enemigo['name']} (Vida {enemigo['life']})")
+    else:
+        print(f"✅ Estado del enemigo actualizado en la base de datos: ID {enemigo['id']} (Vida {enemigo['life']})")
 
 def atacar_enemigo(jugador, enemigo):
 
-    print(f"⚔️ {enemigo['name']} contraataca!")
+    print(f"⚔️ {enemigo['id']} contraataca!")
 
     dano_enemigo = random.randint(10, 20)
 
     if enemigo.get("ability_effect") == "Reduce energía en 30 puntos":
         jugador["energy"] = max(0, jugador["energy"] - 30)
-        print(f"⚡ {enemigo['name']} drena 30 de energía a {jugador['character_name']}!")
+        print(f"⚡ {enemigo['id']} drena 30 de energía a {jugador['character_name']}!")
 
     jugador["life"] -= dano_enemigo
     print(f"💥 {enemigo['name']} hizo {dano_enemigo} de daño a {jugador['character_name']}!")

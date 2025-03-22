@@ -197,6 +197,15 @@ def cargar_progreso(user_id):
 
     return progreso
 
+def obtener_personaje_por_id(character_id):
+    query = """
+    SELECT id, name, life, energy, ability, ability_effect, 
+           weakness, weakness_effect, goal, image_path
+    FROM characters
+    WHERE id = %s
+    """
+    return ejecutar_query(query, (character_id,), fetch_one=True)
+
 
 if __name__ == "__main__":
     print("🔍 Probando consultas de la base de datos...\n")

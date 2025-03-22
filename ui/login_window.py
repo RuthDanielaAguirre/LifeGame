@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 from database.db_queries import guardar_progreso, obtener_personaje_usuario, obtener_personajes_disponibles
+import os
+
 
 try:
     from ui.game_window import GameWindow
@@ -17,11 +19,16 @@ except ModuleNotFoundError as e:
 
 class LoginWindow:
     def __init__(self, root):
+        print("🟣 Constructor LoginWindow activo")
         self.root = root
         self.root.title("LifeGame - Login")
         self.root.geometry("700x500")
 
         # Fondo con imagen
+        ruta_base = os.path.dirname(os.path.abspath(__file__))  # Carpeta ui/
+        ruta_imagen = os.path.join(ruta_base, '..', 'assets', 'login1.png')
+        ruta_imagen = os.path.abspath(ruta_imagen)
+
         self.background_image = Image.open("assets/login1.png")
         self.background_image = self.background_image.resize((700, 500))
         self.background_photo = ImageTk.PhotoImage(self.background_image)
@@ -69,8 +76,11 @@ class LoginWindow:
             messagebox.showerror("Error", "Usuario o contraseña incorrectos.")
 
     def abrir_registro(self):
-        messagebox.showinfo("Registro", "Aquí iría la ventana de registro.")
-
+        from ui.SignUpWindow import SignUpWindow
+        self.root.destroy()
+        root_signup = tk.Tk()
+        SignUpWindow(root_signup)
+        root_signup.mainloop()
 
 class SeleccionPersonajeWindow:
     def __init__(self, root, user_id):
